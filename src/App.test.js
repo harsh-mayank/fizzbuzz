@@ -12,3 +12,9 @@ test("renders 2", () => {
   const fizzbuzz = screen.getByText('2');
   expect(fizzbuzz).toBeInTheDocument(2);
 });
+
+test("renders fizz on occurence of 3", () => {
+  render(<App/>)
+  const fizzbuzz = screen.getByText('fizz');
+  expect(fizzbuzz).toBeInTheDocument('fizz');
+});

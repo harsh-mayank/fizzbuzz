@@ -1,12 +1,10 @@
 import './App.css';
+import FizzBuzz from './components/FizzBuzz';
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <span>1</span>
-        <span>2</span>
-      </div>
+      <FizzBuzz nums = {[1,2,3]} />
     </div>
   );
 }
