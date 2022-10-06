@@ -1,15 +1,24 @@
 import React from 'react';
 
 const fizzBuzz = (props) => {
+    const check = num => {
+        let string = '';
+        if(num===0){
+            return;
+        }
+        if(num%3===0){
+            string+="Fizz";
+        }
+        if(num%5===0){
+            string+="Buzz";
+        }
+        return string ? string : num;
+    }
     return (
-        <div>
-            {props.nums.map((num, index)=>{
-                if(num%3===0){
-                    return <span id={index}>fizz</span>
-                }
-                return <span id= {index}> {num} </span>
-            })}
-        </div>
+        <>
+            <span data-testid = "num-1">{check(props.nums)}</span>
+            <br/>
+        </>
     );
 }
 

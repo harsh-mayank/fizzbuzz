@@ -1,20 +1,41 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import FizzBuzz from './components/FizzBuzz';
 
-test("renders 1", () => {
-  render(<App/>)
-  const fizzbuzz = screen.getByText('1');
-  expect(fizzbuzz).toBeInTheDocument(1);
-});
-
-test("renders 2", () => {
-  render(<App/>)
-  const fizzbuzz = screen.getByText('2');
-  expect(fizzbuzz).toBeInTheDocument(2);
+test("renders fizz on occurence of 1", () => {
+  render(<FizzBuzz nums = {1} />)
+  const fizzbuzz = screen.getByTestId("num-1");
+  expect(fizzbuzz).toBeInTheDocument();
 });
 
 test("renders fizz on occurence of 3", () => {
-  render(<App/>)
-  const fizzbuzz = screen.getByText('fizz');
-  expect(fizzbuzz).toBeInTheDocument('fizz');
+  render(<FizzBuzz nums = {3} />)
+  const fizzbuzz = screen.getByText("Fizz");
+  expect(fizzbuzz).toBeInTheDocument();
 });
+
+test("renders fizz on occurence of multiple of 3", () => {
+  render(<FizzBuzz nums = {6} />)
+  const fizzbuzz = screen.getByText("Fizz");
+  expect(fizzbuzz).toBeInTheDocument();
+});
+
+test("renders buzz on occurence of 5", () => {
+  render(<FizzBuzz nums = {5} />)
+  const fizzbuzz = screen.getByText("Buzz");
+  expect(fizzbuzz).toBeInTheDocument();
+});
+
+test("renders fizz on occurence of multiple of 5", () => {
+  render(<FizzBuzz nums = {10} />)
+  const fizzbuzz = screen.getByText("Buzz");
+  expect(fizzbuzz).toBeInTheDocument();
+});
+
+test("renders FizzBuzz on occurence of multiple of 3 and 5", () => {
+  render(<FizzBuzz nums = {15} />)
+  const fizzbuzz = screen.getByText("FizzBuzz");
+  expect(fizzbuzz).toBeInTheDocument();
+});
+
+
