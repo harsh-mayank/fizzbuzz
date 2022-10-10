@@ -1,23 +1,40 @@
 import React from 'react';
 
 const fizzBuzz = (props) => {
-    const check = num => {
-        let string = '';
-        if(num===0){
-            return;
+    const isDivisibleBy3 = (number) => {
+        return number%3===0
+    }
+
+    const isDivisibleBy5 = (number) => {
+        return number%5===0
+    }
+
+    const check = number => {
+        let displayedText = '';
+        if(isDivisibleBy3(number)){
+            displayedText+="Fizz";
         }
-        if(num%3===0){
-            string+="Fizz";
+        if(isDivisibleBy5(number)){
+            displayedText+="Buzz";
         }
-        if(num%5===0){
-            string+="Buzz";
+        return displayedText ? displayedText : number;
+    }
+
+    const renderFizzBuzz = () => {
+        let numberArray = [];
+        for(let counter=1;counter<=props.nums; counter++){
+            numberArray.push(
+            <div key = {counter}>
+                <span data-testid = {counter}>{check(counter)}</span>
+                <br/>
+            </div>
+            )
         }
-        return string ? string : num;
+        return numberArray;
     }
     return (
         <>
-            <span data-testid = "num-1">{check(props.nums)}</span>
-            <br/>
+            {renderFizzBuzz()}
         </>
     );
 }
