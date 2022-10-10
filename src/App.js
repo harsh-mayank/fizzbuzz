@@ -6,7 +6,8 @@ function App() {
 
   let [count, setCounter] = useState(1);
 
-  const handleCounter = () => {
+  const handleCounter = (event) => {
+    console.log(event);
     setCounter((prevCount)=>prevCount+=1)
   }
 

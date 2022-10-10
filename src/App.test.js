@@ -36,36 +36,48 @@ import App from './App';
 
 
 describe('Counter Button',()=>{
+  let counterButton;
+  beforeEach(()=> {
+    render(<App/>)
+    counterButton = screen.getByRole('button',{name: /counter/i})
+  })
+  function getDisplayedNumber(number) {
+    return screen.getByTestId(number).textContent;
+  }
+
+  function numberOfTimesClicked(number) {
+    for(let counter=1; counter<=number;counter++){
+      fireEvent.click(counterButton);
+    }
+  }
+
   test('renders a counter button',()=>{
-    render(<App />)
-    const counterButton = screen.getByRole('button',{name: /counter/i})
     expect(counterButton).toBeInTheDocument()
   });
 
   test('increases counter value by 1', ()=>{
-    render(<App />)
-    const counterValue = screen.getByTestId(1)
-    const counterButton = screen.getByRole('button',{name: /counter/i})
-    fireEvent.click(counterButton);
-    expect(counterValue.textContent).toBe('1')
+    expect(getDisplayedNumber(1)).toBe('1')
   });
 
   test('renders value 2',()=>{
-    render(<App />)
-    const counterButton = screen.getByRole('button',{name: /counter/i})
-    fireEvent.click(counterButton);
-    const counterValue = screen.getByTestId(2)
-    expect(counterValue.textContent).toBe('2')
+    numberOfTimesClicked(1);
+    expect(getDisplayedNumber(2)).toBe('2')
   });
 
   test('renders value Fizz for value of 3',()=>{
-    render(<App />)
-    const counterButton = screen.getByRole('button',{name: /counter/i})
-    fireEvent.click(counterButton);
-    fireEvent.click(counterButton);
-    const counterValue = screen.getByTestId(3)
-    expect(counterValue.textContent).toBe('Fizz')
+    numberOfTimesClicked(2);
+    expect(getDisplayedNumber(3)).toBe('Fizz');
   });
+
+  test('renders Buzz for value 5', ()=> {
+    numberOfTimesClicked(4);
+    expect(getDisplayedNumber(5)).toBe('Buzz');
+  })
+
+  test('renders FizzBuzz for 15', ()=> {
+    numberOfTimesClicked(14);
+    expect(getDisplayedNumber(15)).toBe('FizzBuzz');
+  })
 })
 
 
